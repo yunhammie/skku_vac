@@ -13,7 +13,6 @@ Created on Wed Jul 26 17:25:20 2023
 DF = pd.read_csv('C:/Users/82107/OneDrive/BIST/5/DF.csv', encoding='CP949')
 all_Date = DF.iloc[1:, 1]
 all_dates = pd.to_datetime(all_Date, format='%d.%m.%Y').dt.strftime('%Y-%m-%d')
-print("hey")
 map_dates = list(set(all_dates))
 map_dates = sorted(map_dates)
 
