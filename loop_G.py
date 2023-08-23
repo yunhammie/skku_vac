@@ -131,56 +131,42 @@ Analyzed_Data['Room1 거동유형'] = None
 Analyzed_Data['Room2 거동유형'] = None
 Analyzed_Data['Room3 거동유형'] = None
 
-
-# print("--------------------------------------------------------------")
-# print("분단위로 데이터를 분석하는 구간입니다.")
-# while True:
-#     try:
-#         # Ask the user for the acceptable range for normal control.
-#         Normal_Range = float(input("정상제어 범위를 입력해주세요(0~5°C):"))
-        
-#         # Check if the entered value is within the range of 0 to 5.
-#         if 0 <=  Normal_Range <= 5:
-#             print(f'정상제어 범위는 (설정값) ± {Normal_Range}°C 입니다.')
-#             break  # Exit the loop if the input is valid
-#         else:
-#             print("입력값이 허용 범위 밖입니다. 다시 입력해주세요.")
-#     except ValueError:
-#         print("입력값이 숫자가 아닙니다. 다시 입력해주세요.")
-# print("분석 중입니다. 기다려주세요.")
-
-hp_1 = 1
+##############################################################################################################################
+##############################################################################################################################
+hp_Room_Temp = 1
+##############################################################################################################################
+##############################################################################################################################
 
 for i in range(len(Analyzed_Data)):
-    if float(Analyzed_Data.loc[i, "Room1_공급/설정_dT"]) > hp_1 and float(Analyzed_Data.loc[i, "1# VAV 댐퍼 개도율(%)"]) < 100 :
+    if float(Analyzed_Data.loc[i, "Room1_공급/설정_dT"]) > hp_Room_Temp and float(Analyzed_Data.loc[i, "1# VAV 댐퍼 개도율(%)"]) < 100 :
         Analyzed_Data.loc[i, 'Room1 거동유형'] = '댐퍼개도율 부족'
-    elif float(Analyzed_Data.loc[i, "Room1_공급/설정_dT"]) > hp_1 and float(Analyzed_Data.loc[i, "1# VAV 댐퍼 개도율(%)"]) >= 100 :
+    elif float(Analyzed_Data.loc[i, "Room1_공급/설정_dT"]) > hp_Room_Temp and float(Analyzed_Data.loc[i, "1# VAV 댐퍼 개도율(%)"]) >= 100 :
         Analyzed_Data.loc[i, 'Room1 거동유형'] = 'VAV풍량 부족'
-    elif (float(Analyzed_Data.loc[i, "Room1_공급/설정_dT"]) >= -hp_1 and float(Analyzed_Data.loc[i, "Room1_공급/설정_dT"]) <= hp_1) or (float(Analyzed_Data.loc[i, "Room1_공급/설정_dT"]) < -hp_1 and float(Analyzed_Data.loc[i, "1# VAV 댐퍼 개도율(%)"]) < 50) :
+    elif (float(Analyzed_Data.loc[i, "Room1_공급/설정_dT"]) >= -hp_Room_Temp and float(Analyzed_Data.loc[i, "Room1_공급/설정_dT"]) <= hp_Room_Temp) or (float(Analyzed_Data.loc[i, "Room1_공급/설정_dT"]) < -hp_Room_Temp and float(Analyzed_Data.loc[i, "1# VAV 댐퍼 개도율(%)"]) < 50) :
         Analyzed_Data.loc[i, 'Room1 거동유형'] = '정상 제어'
-    elif float(Analyzed_Data.loc[i, "Room1_공급/설정_dT"]) < -hp_1 and float(Analyzed_Data.loc[i, "1# VAV 댐퍼 개도율(%)"]) >= 50:
+    elif float(Analyzed_Data.loc[i, "Room1_공급/설정_dT"]) < -hp_Room_Temp and float(Analyzed_Data.loc[i, "1# VAV 댐퍼 개도율(%)"]) >= 50:
         Analyzed_Data.loc[i, 'Room1 거동유형'] = '댐퍼개도율 과다'          
 
     
 for i in range(len(Analyzed_Data)):
-    if float(Analyzed_Data.loc[i, "Room2_공급/설정_dT"]) > hp_1 and float(Analyzed_Data.loc[i, "3# VAV 댐퍼 개도율(%)"]) < 100 :
+    if float(Analyzed_Data.loc[i, "Room2_공급/설정_dT"]) > hp_Room_Temp and float(Analyzed_Data.loc[i, "3# VAV 댐퍼 개도율(%)"]) < 100 :
         Analyzed_Data.loc[i, 'Room2 거동유형'] = '댐퍼개도율 부족'
-    elif float(Analyzed_Data.loc[i, "Room2_공급/설정_dT"]) > hp_1 and float(Analyzed_Data.loc[i, "3# VAV 댐퍼 개도율(%)"]) >= 100 :
+    elif float(Analyzed_Data.loc[i, "Room2_공급/설정_dT"]) > hp_Room_Temp and float(Analyzed_Data.loc[i, "3# VAV 댐퍼 개도율(%)"]) >= 100 :
         Analyzed_Data.loc[i, 'Room2 거동유형'] = 'VAV풍량 부족'
-    elif (float(Analyzed_Data.loc[i, "Room2_공급/설정_dT"]) >= -hp_1 and float(Analyzed_Data.loc[i, "Room2_공급/설정_dT"]) <= hp_1) or (float(Analyzed_Data.loc[i, "Room2_공급/설정_dT"]) < -hp_1 and float(Analyzed_Data.loc[i, "3# VAV 댐퍼 개도율(%)"]) < 50) :
+    elif (float(Analyzed_Data.loc[i, "Room2_공급/설정_dT"]) >= -hp_Room_Temp and float(Analyzed_Data.loc[i, "Room2_공급/설정_dT"]) <= hp_Room_Temp) or (float(Analyzed_Data.loc[i, "Room2_공급/설정_dT"]) < -hp_Room_Temp and float(Analyzed_Data.loc[i, "3# VAV 댐퍼 개도율(%)"]) < 50) :
         Analyzed_Data.loc[i, 'Room2 거동유형'] = '정상 제어'
-    elif float(Analyzed_Data.loc[i, "Room2_공급/설정_dT"]) < -hp_1 and float(Analyzed_Data.loc[i, "3# VAV 댐퍼 개도율(%)"]) >= 50:
+    elif float(Analyzed_Data.loc[i, "Room2_공급/설정_dT"]) < -hp_Room_Temp and float(Analyzed_Data.loc[i, "3# VAV 댐퍼 개도율(%)"]) >= 50:
         Analyzed_Data.loc[i, 'Room2 거동유형'] = '댐퍼개도율 과다'          
 
 
 for i in range(len(Analyzed_Data)):
-    if float(Analyzed_Data.loc[i, "Room3_공급/설정_dT"]) > hp_1 and float(Analyzed_Data.loc[i, "5# VAV 댐퍼 개도율(%)"]) < 100 :
+    if float(Analyzed_Data.loc[i, "Room3_공급/설정_dT"]) > hp_Room_Temp and float(Analyzed_Data.loc[i, "5# VAV 댐퍼 개도율(%)"]) < 100 :
         Analyzed_Data.loc[i, 'Room3 거동유형'] = '댐퍼개도율 부족'
-    elif float(Analyzed_Data.loc[i, "Room3_공급/설정_dT"]) > hp_1 and float(Analyzed_Data.loc[i, "5# VAV 댐퍼 개도율(%)"]) >= 100 :
+    elif float(Analyzed_Data.loc[i, "Room3_공급/설정_dT"]) > hp_Room_Temp and float(Analyzed_Data.loc[i, "5# VAV 댐퍼 개도율(%)"]) >= 100 :
         Analyzed_Data.loc[i, 'Room3 거동유형'] = 'VAV풍량 부족'
-    elif (float(Analyzed_Data.loc[i, "Room3_공급/설정_dT"]) >= -hp_1 and float(Analyzed_Data.loc[i, "Room3_공급/설정_dT"]) <= hp_1) or (float(Analyzed_Data.loc[i, "Room3_공급/설정_dT"]) < -hp_1 and float(Analyzed_Data.loc[i, "5# VAV 댐퍼 개도율(%)"]) < 50) :
+    elif (float(Analyzed_Data.loc[i, "Room3_공급/설정_dT"]) >= -hp_Room_Temp and float(Analyzed_Data.loc[i, "Room3_공급/설정_dT"]) <= hp_Room_Temp) or (float(Analyzed_Data.loc[i, "Room3_공급/설정_dT"]) < -hp_Room_Temp and float(Analyzed_Data.loc[i, "5# VAV 댐퍼 개도율(%)"]) < 50) :
         Analyzed_Data.loc[i, 'Room3 거동유형'] = '정상 제어'
-    elif float(Analyzed_Data.loc[i, "Room3_공급/설정_dT"]) < -hp_1 and float(Analyzed_Data.loc[i, "5# VAV 댐퍼 개도율(%)"]) >= 50:
+    elif float(Analyzed_Data.loc[i, "Room3_공급/설정_dT"]) < -hp_Room_Temp and float(Analyzed_Data.loc[i, "5# VAV 댐퍼 개도율(%)"]) >= 50:
         Analyzed_Data.loc[i, 'Room3 거동유형'] = '댐퍼개도율 과다'        
 
 
