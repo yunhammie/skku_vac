@@ -790,8 +790,3 @@ print("Tower - abnormal behavior #type 2 (Incidence in 1h > 20m) <Incidence Rate
 sum_of_time = int(45853)
 sum_of_abnormal_3 = int(Tower_Abnormal_3_grouped.iloc[:, 2].sum())
 print("Tower - abnormal behavior #type 3 (Incidence in 1h > 20m) <Incidence Rate>: " + str(round((sum_of_abnormal_3/sum_of_time)*100, 2)) + "%")
-
-#%% (9)
-# pivot_table을 사용하여 원하는 형태로 데이터 변환
-pivot_Abnormal = Tower_Abnormal_df_all(index='dates', columns='None', values='거동 유형')
-
