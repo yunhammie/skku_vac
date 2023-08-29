@@ -1370,4 +1370,29 @@ print(f"loop{hp_Loop} #type 3 (Incidence in 1h > {hp_time_type3}m) <Incidence Ra
 sum_of_abnormal_4_OAC = int(SA_T_OAC_Abnormal_4_grouped.iloc[:, 2].sum())
 print(f"loop{hp_Loop} #type 4 (Incidence in 1h > {hp_time_type4}m) <Incidence Rate>: "+ str(round((sum_of_abnormal_4_OAC/sum_of_time_OAC)*100, 2)) + "%")
 
+##### 외기냉방에서의 이상거동 진단 -> 삭제해도 될 듯 #####
 
+#%% (10) 분단위 프레임 만들기
+
+minute_map = minute_abnormal(DF, SA_df_adaptX)
+
+i = 1
+while i < SA_T_Abnormal_df_all.shape[0]-1:
+    date1 = SA_T_Abnormal_df_all.iloc[i-1, 0]
+    date2 = SA_T_Abnormal_df_all.iloc[i,0]
+    time = SA_T_Abnormal_df_all.iloc[i-1,1]
+    condition1 = SA_T_Abnormal_df_all.iloc[i-1, 8] == 0 #정상
+    condition2 = SA_T_Abnormal_df_all.iloc[i-1, 8] == 1 #이상거동 유형1 
+    condition3 = SA_T_Abnormal_df_all.iloc[i-1, 8] == 2 #이상거동 유형2
+    condition4 = SA_T_Abnormal_df_all.iloc[i-1, 8] == 3 #이상거동 유형3
+    
+    code = 404 # 오류, 안 잡힌 경우
+    if date1 != date2: code = 0 # 날짜가 바뀌면 마지막 시간대는 0으로 표시
+    elif condition1: code = 0
+    elif condition2: code = 1
+    elif condition3: code = 2
+    elif condition4: code = 3
+    minute_map.loc[date1, time] = code
+    i+=1
+
+minute_map.to_csv("C:/Users/seoeu/Downloads/HVAC_Code/Minute_map_loopE.csv", encoding='CP949')
